@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>测试</title>
+    <script language="javascript" type="text/javascript" src="./player/UtoVRPlayerGuide.js"></script>
+</head>
+<body>
+<div style="position:relative;width: 800px;height: 500px; margin:40px auto;">
+    <div style="position:relative;width: 800px;height: 500px; margin:10px auto;" id="piano"></div>
+</div>
+<script language="javascript" type="text/javascript">
+    /*播放器参数配置*/
+    var params = {
+        container: document.getElementById("piano"),
+        name: "SceneViewer",
+        dragDirectionMode: true,//拖拽方向
+        dragMode: true,         //开启拖拽
+        isGyro:true,            //默认开启陀螺仪功能  移动端支持陀螺仪设备有效
+        scenesArr: [
+            //todo:注意修改视频路径，需要保证播放页面与视频属于同一域名下
+            {
+                sceneId: "v1",
+                sceneName: "赛车",
+                sceneFilePath: "./video/960p.mp4",
+                sceneType: "Video",
+                isVideoAutoPlay: true  //todo:注意isVideoAutoPlay 是H5 模式下的播放属性，不适用于移动端
+            }
+        ],
+        //播放器不支持全景播放回调
+        errorCallBack: function (e) {
+            console.log("错误状态：" + e);
+        },
+        //浏览器不支持全屏回调
+        fsCallBack: function (status, playObj) {
+            alert("浏览器不支持全屏！");
+        }
+    };
+    /*初始化开始*/
+    window.onload = function () {
+        initLoad(params);
+    };
+</script>
+</body>
+</html>

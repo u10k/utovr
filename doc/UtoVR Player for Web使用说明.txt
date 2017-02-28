@@ -1,0 +1,43 @@
+﻿UtoVR Player for Web使用说明
+
+播放器的使用遵循简单实用的原则，只需3步操作即可完成配置。
+
+1，文件引用：
+将获取到的开发包文件(lib目录下的player文件夹)放置在Web项目的目录下，在html页面<head>标签内通过<script>标签引入播放器的引导js即可。
+例如：
+<!--引入引导js 动态下载播放器-->
+<script language="javascript" type="text/javascript" src="./player/UtoVRPlayerGuide.js"></script>
+
+注意保证src的路径配置正确。
+
+2，页面参数的配置:
+   
+<script language="javascript" type="text/javascript">
+    /*播放器参数配置*/
+    var params = {
+        container:document.body, //播放器容器Dom对象
+        name:"SceneViewer", //播放器名称
+        dragDirectionMode:true, //播放器拖动模式
+        width:800, //播放器的width
+        height:500, //播放器的height
+        /*fullScreenMode:true,//全屏模式 ===>如果是配置了该参数，将忽略width和height的配置，播放器将取当前窗口的尺寸作为播放器的初始尺寸*/
+        scenesArr:[
+            {sceneId:"test1k", sceneFilePath:"./panoVideo/960p.mp4", sceneType:"Video", initPan:0, initFov:100}
+        ]
+    };
+    //sceneFilePath:为全景视频的路径配置，sceneType：场景类型配置
+</script>
+
+3，页面播放器实例化：
+    
+<script language="javascript" type="text/javascript">
+    /*根据页面配置参数，实例化播放器*/
+    window.onload = function () {
+        initLoad(params);
+    };
+</script>
+    
+注意：initLoad 可以在window.onload 或者是 其他点击事件的函数处理中 进行调用。这个可以根据具体的功能需求进行操作，但必须保证 调用前，页面引入了UtoVRPlayerGuide.js
+        
+    
+完整页面代码请参考SDK中sample文件夹中的案例！

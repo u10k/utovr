@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>UtoVR-全景视频直播配置</title>
+    <meta name="keywords" content="全景视频，全景视频播放器，全景视频下载，全景视频片源，UtoVR片源，全景视频拍摄，全景视频拼合，全景视频制作">
+    <meta name="description" content="本站是国内最专业的全景视频平台。提供高清全景视频片源下载、在线浏览全景视频内容。也提供全景视频拍摄、全景视频拼合，全景视频制作，全景视频解决方案。">
+    <style type="text/css">
+        html body {
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            -ms-touch-action: none;
+        }
+
+        #showContent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        #showPano {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    </style>
+    <!--引入引导js 动态下载播放器-->
+    <script language="javascript" type="text/javascript" src="./player/UtoVRPlayerGuide.js"></script>
+
+</head>
+<body>
+<!--播放器容器-->
+<div id="showContent">
+    <div id="showPano"></div>
+</div>
+</body>
+<script language="javascript" type="text/javascript">
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return (r[2]);
+        return null;
+    }
+    window.onload = function () {
+        var searchSTR = getQueryString("src");
+        if(searchSTR){
+            //场景数据配置
+            var sceneData = [
+                {sceneId:"v1", sceneName:"赛车", sceneFilePath:searchSTR, sceneType:"Video",isVideoPlay:false}
+            ];
+            //播放器初始化
+            var params = {
+                container:document.getElementById("showPano"),
+                name: "SceneViewer",
+                fullScreenMode:true,			      //全屏模式
+                dragDirectionMode: true,
+                dragMode: false,
+                scenesArr: sceneData
+            };
+            initLoad(params);
+        }else{
+            document.write("<div style='font-size: 14px;width: 100%;height:100%;'>" +
+            "<div>请在地址栏后面加上src=******   .mp4 或者.m3u8 格式的视频地址</div></br>" +
+            "<div>注意：该页面为H5单独的测试页面，兼容手机和pc！</div></br>" +
+            "<div>MP4配置：?src=http://cache.utovr.com/201508240527049953.mp4</div></br>" +
+            "<div>HLS配置：?src=http://cache.utovr.com/201508240527049953.m3u8</div></br>" +
+            " </div>");
+        }
+
+    };
+</script>
+</html>
